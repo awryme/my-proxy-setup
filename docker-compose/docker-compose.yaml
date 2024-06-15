@@ -1,0 +1,21 @@
+# need to set in .env:
+# NEXTDNS_ID=<nextdns_id>
+# NETWORK_IP=<network_ip>
+services:
+  dnsproxy:
+    image: ghcr.io/awryme/dnsproxy
+    network_mode: host
+    command: [
+      "--addr", "${NETWORK_IP}",
+      "--rewrites-cfg", "/rewrites.json",
+      "--dns.upstream", "tls://${NEXTDNS_ID}.dns.nextdns.io"
+    ]
+    restart: on-failure
+    volumes:
+      - /root/configs/dnsproxy/rewrites.json:/rewrites.json
+  sniproxy:
+    image: ghcr.io/awryme/sniproxy
+    network_mode: host
+    command: ["--listen-addr", "${NETWORK_IP}"]
+    restart: on-failure
+  
