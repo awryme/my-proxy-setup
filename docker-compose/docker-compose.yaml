@@ -16,8 +16,8 @@ services:
     logging:
       driver: local
       options:
-        max-size: 100m
-        max-file: 5
+        max-size: "100m"
+        max-file: "5"
   sniproxy:
     image: ghcr.io/awryme/sniproxy
     network_mode: host
@@ -26,6 +26,6 @@ services:
     logging:
       driver: local
       options:
-        max-size: 100m
-        max-file: 5
+        max-size: "100m"
+        max-file: "5"
   
