@@ -13,9 +13,19 @@ services:
     restart: on-failure
     volumes:
       - /root/configs/dnsproxy/rewrites.json:/rewrites.json
+    logging:
+      driver: local
+      options:
+        max-size: 100m
+        max-file: 5
   sniproxy:
     image: ghcr.io/awryme/sniproxy
     network_mode: host
     command: ["--listen-addr", "${NETWORK_IP}"]
     restart: on-failure
+    logging:
+      driver: local
+      options:
+        max-size: 100m
+        max-file: 5
   
